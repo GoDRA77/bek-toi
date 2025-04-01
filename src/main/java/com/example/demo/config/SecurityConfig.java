@@ -15,11 +15,13 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authorizeHttpRequests()
-                .requestMatchers("/api/auth/**").permitAll()
-                .anyRequest().permitAll();
+                .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/auth/**").permitAll() // Регистрация и вход доступны всем
+                        .requestMatchers("/api/user/profile").authenticated() // Профиль только для авторизованных
+                        //.anyRequest().authenticated()
+                        .anyRequest().permitAll()// Все остальные запросы тоже требуют авторизации
+                );
 
         return http.build();
     }

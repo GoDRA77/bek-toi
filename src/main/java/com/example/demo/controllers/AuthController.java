@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import org.springframework.security.core.Authentication;
 import com.example.demo.dto.AuthRequest;
 import com.example.demo.models.User;
 import com.example.demo.repositories.UserRepository;
@@ -46,5 +47,12 @@ public class AuthController {
             return ResponseEntity.ok("Успешный вход");
         }
         return ResponseEntity.status(401).body("Неверный email или пароль");
+    }
+    public ResponseEntity<User> getProfile(Authentication authentication) {
+        String email = authentication.getName(); // Получаем email текущего пользователя
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        return ResponseEntity.ok(user);
     }
 }
