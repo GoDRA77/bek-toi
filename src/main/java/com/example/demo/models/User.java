@@ -24,6 +24,10 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    private String confirmationCode;
+    private boolean confirmed;
+
+
     // Геттеры и сеттеры вручную
     public Long getId() {
         return id;
@@ -52,6 +56,23 @@ public class User implements UserDetails {
     public void setRole(Role role) {
         this.role = role;
     }
+
+    public String getConfirmationCode() {
+        return confirmationCode;
+    }
+
+    public void setConfirmationCode(String confirmationCode) {
+        this.confirmationCode = confirmationCode;
+    }
+
+    public boolean isConfirmed() {
+        return confirmed;
+    }
+
+    public void setConfirmed(boolean confirmed) {
+        this.confirmed = confirmed;
+    }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

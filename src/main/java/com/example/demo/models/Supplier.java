@@ -16,7 +16,8 @@ public class Supplier {
     private String description;
     private String contactInfo;
     private BigDecimal price;
-
+    private Double rating;         // ⭐ Рейтинг по 5-бальной шкале
+    private Integer capacity;
     // Пустой конструктор (обязателен для JPA)
     public Supplier() {}
 
@@ -28,6 +29,8 @@ public class Supplier {
         this.description = description;
         this.contactInfo = contactInfo;
         this.price = price;
+        this.rating = rating;
+        this.capacity = capacity;
     }
 
     // Геттеры и сеттеры
@@ -77,5 +80,20 @@ public class Supplier {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+    public Double getRating() {
+        return rating;
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
+    }
+
+    public Integer getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(Integer capacity) {
+        this.capacity = capacity;
     }
 }
